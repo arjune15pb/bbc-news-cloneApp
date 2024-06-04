@@ -12,7 +12,9 @@ function Home(props){
 
          try{
                await setDoc(newsDoc,{
-                title:data.title, description: data.description
+                title:data.title, description: data.description,
+                content:data.content, author: data.author, publishedAt:data.publishedAt,
+                urlToNews:data.url
                })
          }catch(err){
           console.error(err)
@@ -24,7 +26,7 @@ function Home(props){
         fetch(
           `https://newsapi.org/v2/everything?q=${
             props.menu ? props.menu : 'All'
-          }&sortBy=popularity&apiKey=aeebba176c9f40d7a251eaef5da8bb00`
+          }&sortBy=popularity&apiKey=1b4c757ac4b744b7b0ec3b2f3f37ec3a`
         )
           .then((res) => res.json())
           .then((json) => setNews(json.articles))

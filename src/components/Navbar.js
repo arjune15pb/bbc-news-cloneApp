@@ -5,10 +5,12 @@ import lens from '../images/lens.png'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase/setup'
 import { signOut } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function Navbar(props) {
   const navigate = useNavigate()
+  const location=useLocation()
+
   const logout = async () => {
     try {
       await signOut(auth)
@@ -17,6 +19,7 @@ function Navbar(props) {
       console.error(err)
     }
   }
+  
   return (
     <div className="grid grid-cols-3 bg-black text-white fixed">
       <div className=" flex p-2">
@@ -26,7 +29,7 @@ function Navbar(props) {
             onClick={logout}
             className="text-white flex hover:border border-white p-2 "
           >
-            Logout
+            Logout {auth.currentUser.displayName.split(" ")[0]}
           </button>
         ) : (
           <Link to="/signin">
@@ -39,66 +42,73 @@ function Navbar(props) {
       </div>
 
       <div className="flex">
-        <button
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'All' ? 'underline' : '')
-          }
-          onClick={() => {
-            props.setMenu('All')
-          }}
-        >
-          Home
-        </button>
-        <button
-          onClick={() => props.setMenu('Sport')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Sport' ? 'underline' : '')
-          }
-        >
-          Sport
-        </button>
-        <button
-          onClick={() => props.setMenu('Business')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Business' ? 'underline' : '')
-          }
-        >
-          Business
-        </button>
-        <button
-          onClick={() => props.setMenu('Innovation')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Innovation' ? 'underline' : '')
-          }
-        >
-          Innovation
-        </button>
-        <button
-          onClick={() => props.setMenu('Culture')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Culture' ? 'underline' : '')
-          }
-        >
-          Culture
-        </button>
-        <button
-          onClick={() => props.setMenu('Travel')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Travel' ? 'underline' : '')
-          }
-        >
-          Travel
-        </button>
-
-      
+        <Link className="mt-4" to="/" state={{ menu: 'All' }}>
           <button
-           onClick={()=>props.setMenu('Earth')}
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'All' ? 'underline' : '')
+            }
+          >
+            Home
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Sport' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Sport' ? 'underline' : '')
+            }
+          >
+            Sport
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Business' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Business' ? 'underline' : '')
+            }
+          >
+            Business
+          </button>
+        </Link>
+        <Link className="mt-4" to="/" state={{ menu: 'Innovation' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Innovation' ? 'underline' : '')
+            }
+          >
+            Innovation
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Culture' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Culture' ? 'underline' : '')
+            }
+          >
+            Culture
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Travel' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Travel' ? 'underline' : '')
+            }
+          >
+            Travel
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Earth' }}>
+          <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Earth' ? 'underline' : '')
@@ -106,17 +116,22 @@ function Navbar(props) {
           >
             Earth
           </button>
-        
-        <button
-          onClick={() => props.setMenu('Movie')}
-          className={
-            'ml-7 font-semibold text-sm ' +
-            (props.menu === 'Movie' ? 'underline' : '')
-          }
-        >
-          Movie
-        </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Movie' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (props.menu === 'Movie' ? 'underline' : '')
+            }
+          >
+            Movie
+          </button>
+        </Link>
       </div>
+      
+      {location.pathname=='/'&&
+      
       <div className=" ml-40 flex p-4">
         <img src={lens} className="h-6" />
         <input
@@ -125,6 +140,8 @@ function Navbar(props) {
           placeholder="Search BBC"
         />
       </div>
+      }
+      
     </div>
   )
 }
