@@ -5,8 +5,9 @@ import {database} from '../firebase/setup'
 
 function Home(props){
 
-    const [news,setNews]= useState([])
 
+    const [news,setNews]= useState([])
+    
     const addNews = async(data)=>{
       const newsDoc=doc(database, "News",`${data.url.substr(-10,10)}` )
 
@@ -26,21 +27,34 @@ function Home(props){
         fetch(
           `https://newsapi.org/v2/everything?q=${
             props.menu ? props.menu : 'All'
-          }&sortBy=popularity&apiKey=1b4c757ac4b744b7b0ec3b2f3f37ec3a`
+          }&sortBy=popularity&apiKey=735b8383aacf489398a06a4541ddae47`
         )
           .then((res) => res.json())
           .then((json) => setNews(json.articles))
+
     }
 
     useEffect(()=>{
-        getNews()
+        getNews();
     },[news])
-
 
 
     return (
       <div className="mt-12 p-5 grid grid-cols-4">
-        {news
+        { [...news].sort(function(a,b){
+          
+            if (a.urlToImage != null && b.urlToImage === null) {
+              
+              return -1
+            }
+            if (a.urlToImage === null && b.urlToImage != null) {
+              
+              return 1
+              
+            }
+            return 0
+            
+          })
           ?.filter((data) => data.title.includes(props.search))
           ?.filter((data) => data.title != '[Removed]' )
           .map((data) => {
