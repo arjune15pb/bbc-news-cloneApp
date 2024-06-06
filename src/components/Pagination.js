@@ -10,7 +10,7 @@ const Pagination = ({totalPosts, postsPerPage, setCurrentPage, currentPage}) =>{
 
 
     return (
-        <div className='grid grid-cols-12 pagination'>
+        <div className='pagination'>
             {
                 pages.map((page, index) => {
                     return <button key={index} onClick={() => setCurrentPage(page)} className=
