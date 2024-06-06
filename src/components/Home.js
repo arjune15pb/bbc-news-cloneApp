@@ -32,7 +32,7 @@ function Home(props){
         fetch(
           `https://newsapi.org/v2/everything?q=${
             props.menu ? props.menu : 'All'
-          }&sortBy=popularity&apiKey=735b8383aacf489398a06a4541ddae47`
+          }&sortBy=popularity&apiKey=aeebba176c9f40d7a251eaef5da8bb00`
         )
           .then((res) => res.json())
           .then((json) => setNews(json.articles))
@@ -45,9 +45,9 @@ function Home(props){
 
     const Image =({ isImageNull, homeImage, altText}) =>{
       if (isImageNull == null) {
-        return <img className="w-full max-h-52" src={noimage} alt={altText}/> ;
+        return <img className="w-full h-52" src={noimage} alt={altText}/> ;
       }
-      return <img className="w-full max-h-52" src={homeImage} alt={altText}/> ;
+      return <img className="w-full h-52" src={homeImage} alt={altText}/> ;
     }
 
     const lastPostIndex = currentPage * postsPerPage;
@@ -62,6 +62,7 @@ function Home(props){
     const currentNewsPosts = newsWithoutRemovedPosts.slice(firstPostIndex,lastPostIndex);
 
     return (
+      <div>
       <div className="mt-12 p-5 grid grid-cols-4">
         { [...currentNewsPosts].sort(function(a,b){
           
@@ -92,15 +93,15 @@ function Home(props){
                     <Image isImageNull={data.urlToImage} homeImage={data.urlToImage} altText={data.title}/>
                     <div className="px-6 py-4">
                       <div className="font-bold text-xl mb-2 data-title">{data.title}</div>
-                      <p className="text-gray-700 text-base">{data.content}</p>
+                      <p className="text-gray-700 text-base data-content">{data.content}</p>
                     </div>
                   </div>
                 </Link>
               </>
             )
           })}
-
-            <Pagination 
+      </div>
+      <Pagination 
             totalPosts={newsWithoutRemovedPosts.length} 
             postsPerPage={postsPerPage} 
             setCurrentPage={setCurrentPage} 
