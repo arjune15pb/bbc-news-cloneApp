@@ -1,0 +1,22 @@
+/* .data-desc{
+    height: max-content;
+} */
+
+.data-title{
+    margin: 0 0 4px 0;
+    line-height: 2rem;
+    overflow: hidden;
+    display: block;
+    max-height: 4rem;
+    -webkit-line-clamp: 2;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    /* white-space: normal; */
+}
+
+/* .data-img{
+    width: 1200px;
+    height: 628px;
+} */
