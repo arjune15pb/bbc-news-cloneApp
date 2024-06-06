@@ -9,7 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 function Navbar(props) {
   const navigate = useNavigate()
-  const location=useLocation()
+  const location = useLocation()
 
   const logout = async () => {
     try {
@@ -19,7 +19,7 @@ function Navbar(props) {
       console.error(err)
     }
   }
-  
+
   return (
     <div className="grid grid-cols-3 bg-black text-white fixed">
       <div className=" flex p-2">
@@ -29,7 +29,7 @@ function Navbar(props) {
             onClick={logout}
             className="text-white flex hover:border border-white p-2 "
           >
-            Logout {auth.currentUser.displayName.split(" ")[0]}
+            Logout {auth.currentUser.displayName.split(' ')[0]}
           </button>
         ) : (
           <Link to="/signin">
@@ -42,7 +42,12 @@ function Navbar(props) {
       </div>
 
       <div className="flex">
-        <Link className="mt-4" to="/" state={{ menu: 'All' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'All' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -53,7 +58,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Sport' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Sport' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -64,7 +74,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Business' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Business' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -74,7 +89,12 @@ function Navbar(props) {
             Business
           </button>
         </Link>
-        <Link className="mt-4" to="/" state={{ menu: 'Innovation' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Innovation' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -85,7 +105,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Culture' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Culture' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -96,7 +121,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Travel' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Travel' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -107,7 +137,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Earth' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Earth' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -118,7 +153,12 @@ function Navbar(props) {
           </button>
         </Link>
 
-        <Link className="mt-4" to="/" state={{ menu: 'Movie' }}>
+        <Link
+          className="mt-4"
+          to="/"
+          state={{ menu: 'Movie' }}
+          onClick={() => props.setCurrentPage(1)}
+        >
           <button
             className={
               'ml-7 font-semibold text-sm ' +
@@ -129,19 +169,17 @@ function Navbar(props) {
           </button>
         </Link>
       </div>
-      
-      {location.pathname=='/'&&
-      
-      <div className=" ml-40 flex p-4">
-        <img src={lens} className="h-6" />
-        <input
-          onChange={(e) => props.setSearch(e.target.value)}
-          className=" flex bg-black"
-          placeholder="Search BBC"
-        />
-      </div>
-      }
-      
+
+      {location.pathname == '/' && (
+        <div className=" ml-40 flex p-4">
+          <img src={lens} className="h-6" />
+          <input
+            onChange={(e) => props.setSearch(e.target.value)}
+            className=" flex bg-black"
+            placeholder="Search BBC"
+          />
+        </div>
+      )}
     </div>
   )
 }

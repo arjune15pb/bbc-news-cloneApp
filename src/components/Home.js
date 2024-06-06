@@ -1,99 +1,108 @@
 import { doc, setDoc } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {database} from '../firebase/setup'
+import { database } from '../firebase/setup'
 import noimage from '../images/no-image.jpg'
 import Pagination from './Pagination'
-import '../css/Bbc.css';
+import '../css/Bbc.css'
 
-function Home(props){
+function Home(props) {
+  const [news, setNews] = useState([])
+  //const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8)
 
+  const addNews = async (data) => {
+    const newsDoc = doc(database, 'News', `${data.url.substr(-10, 10)}`)
 
-    const [news,setNews]= useState([])
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(8);
-    
-    const addNews = async(data)=>{
-      const newsDoc=doc(database, "News",`${data.url.substr(-10,10)}` )
-
-         try{
-               await setDoc(newsDoc,{
-                title:data.title, description: data.description,
-                content:data.content, author: data.author, publishedAt:data.publishedAt,
-                urlToNews:data.url
-               })
-         }catch(err){
-          console.error(err)
-         }
-      
+    try {
+      await setDoc(newsDoc, {
+        title: data.title,
+        description: data.description,
+        content: data.content,
+        author: data.author,
+        publishedAt: data.publishedAt,
+        urlToNews: data.url,
+      })
+    } catch (err) {
+      console.error(err)
     }
+  }
 
-    const getNews=()=>{
-        fetch(
-          `https://newsapi.org/v2/everything?q=${
-            props.menu ? props.menu : 'All'
-          }&sortBy=popularity&apiKey=aeebba176c9f40d7a251eaef5da8bb00`
-        )
-          .then((res) => res.json())
-          .then((json) => setNews(json.articles))
+  const getNews = () => {
+    fetch(
+      `https://newsapi.org/v2/everything?q=${
+        props.menu ? props.menu : 'All'
+      }&sortBy=popularity&apiKey=6c03d021c8cc4e6694a5ea47bc194b69`
+    )
+      .then((res) => res.json())
+      .then((json) => setNews(json.articles))
+  }
 
+  useEffect(() => {
+    getNews()
+  }, [news])
+
+  const Image = ({ isImageNull, homeImage, altText }) => {
+    if (isImageNull == null) {
+      return <img className="w-full h-52" src={noimage} alt={altText} />
     }
+    return <img className="w-full h-52" src={homeImage} alt={altText} />
+  }
 
-    useEffect(()=>{
-        getNews();
-    },[news])
+  const lastPostIndex = props.currentPage * postsPerPage
+  const firstPostIndex = lastPostIndex - postsPerPage
 
-    const Image =({ isImageNull, homeImage, altText}) =>{
-      if (isImageNull == null) {
-        return <img className="w-full h-52" src={noimage} alt={altText}/> ;
-      }
-      return <img className="w-full h-52" src={homeImage} alt={altText}/> ;
-    }
+  const newsWithoutRemovedPosts = news
+    ?.filter((data) => data.title.includes(props.search))
+    ?.filter((data) => data.title != '[Removed]')
 
-    const lastPostIndex = currentPage * postsPerPage;
-    const firstPostIndex = lastPostIndex - postsPerPage;
+  //console.log("news length"+newsWithoutRemovedPosts.length)
 
-    const newsWithoutRemovedPosts = news
-          ?.filter((data) => data.title.includes(props.search))
-          ?.filter((data) => data.title != '[Removed]' )    
-
-    //console.log("news length"+newsWithoutRemovedPosts.length)
-
-    const currentNewsPosts = newsWithoutRemovedPosts.slice(firstPostIndex,lastPostIndex);
-
-    return (
-      <div>
+  const currentNewsPosts = newsWithoutRemovedPosts.slice(
+    firstPostIndex,
+    lastPostIndex
+  )
+  console.log(currentNewsPosts)
+  return (
+    <div>
       <div className="mt-12 p-5 grid grid-cols-4">
-        { [...currentNewsPosts].sort(function(a,b){
-          
+        {[...currentNewsPosts]
+          .sort(function (a, b) {
             if (a.urlToImage != null && b.urlToImage === null) {
-              
               return -1
             }
             if (a.urlToImage === null && b.urlToImage != null) {
-              
               return 1
-              
             }
             return 0
-            
           })
           ?.filter((data) => data.title.includes(props.search))
-          // ?.filter((data) => data.title != '[Removed]' )
           .map((data) => {
             return (
               <>
-                <Link  onClick={()=> addNews(data)} to="/details" state={{data: data}}>
+                <Link
+                  onClick={() => addNews(data)}
+                  to="/details"
+                  state={{ data: data }}
+                >
                   <div className="max-w-sm rounded overflow-hidden shadow-lg">
                     {/* <img
                       className="w-full"
                       src={data.urlToImage}
                       alt={data.title}
                     /> */}
-                    <Image isImageNull={data.urlToImage} homeImage={data.urlToImage} altText={data.title}/>
+                    <Image
+                      isImageNull={data.urlToImage}
+                      homeImage={data.urlToImage}
+                      altText={data.title}
+                    />
                     <div className="px-6 py-4">
-                      <div className="font-bold text-xl mb-2 data-title">{data.title}</div>
-                      <p className="text-gray-700 text-base data-content">{data.content}</p>
+                      <div className="font-bold text-xl mb-2 data-title">
+                        {data.title}
+                      </div>
+                      <p className="text-gray-700 text-base data-content">
+                        {data.content}
+                      </p>
                     </div>
                   </div>
                 </Link>
@@ -101,13 +110,16 @@ function Home(props){
             )
           })}
       </div>
-      <Pagination 
-            totalPosts={newsWithoutRemovedPosts.length} 
-            postsPerPage={postsPerPage} 
-            setCurrentPage={setCurrentPage} 
-            currentPage={currentPage} />
+      <div>
+        <Pagination
+          totalPosts={newsWithoutRemovedPosts.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={props.setCurrentPage}
+          currentPage={props.currentPage}
+        />
       </div>
-    )
+    </div>
+  )
 }
 
 export default Home

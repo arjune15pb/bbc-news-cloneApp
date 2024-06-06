@@ -7,6 +7,7 @@ import {useLocation} from 'react-router-dom'
 function Main(){
 
     const location=useLocation();
+    const [currentPage, setCurrentPage] = useState(1)
 
     
     const [menu,setMenu]= useState("All")
@@ -17,12 +18,23 @@ function Main(){
       menu1=location.state.menu
         
     }
+    
  
     return (
-        <div className='grid grid-row-2'>
-            <Navbar setMenu={setMenu} menu={menu1} setSearch={setSearch}/>
-            <Home menu={menu1} search={search}/>
-        </div>
+      <div className="grid grid-row-2">
+        <Navbar
+          setCurrentPage={setCurrentPage}
+          setMenu={setMenu}
+          menu={menu1}
+          setSearch={setSearch}
+        />
+        <Home
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          menu={menu1}
+          search={search}
+        />
+      </div>
     )
 }
 export default Main
