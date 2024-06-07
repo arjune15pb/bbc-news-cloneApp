@@ -42,127 +42,140 @@ function Navbar(props) {
       </div>
 
       <div className="flex">
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'All' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'All' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'All' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Home
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Sport' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/weather" state={{ menu: 'Weather' }}>
+          <button
+            className={
+              'ml-7 font-semibold text-sm ' +
+              (location.pathname === '/weather' ? 'underline' : '')
+            }
+            onClick={() => props.setCurrentPage(1)}
+          >
+            Weather
+          </button>
+        </Link>
+
+        <Link className="mt-4" to="/" state={{ menu: 'Sport' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Sport' ? 'underline' : '')
             }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
+            }
           >
+           
             Sport
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Business' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Business' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Business' ? 'underline' : '')
             }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
+            }
           >
             Business
           </button>
         </Link>
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Innovation' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Innovation' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Innovation' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Innovation
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Culture' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Culture' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Culture' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Culture
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Travel' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Travel' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Travel' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Travel
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Earth' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Earth' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Earth' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Earth
           </button>
         </Link>
 
-        <Link
-          className="mt-4"
-          to="/"
-          state={{ menu: 'Movie' }}
-          onClick={() => props.setCurrentPage(1)}
-        >
+        <Link className="mt-4" to="/" state={{ menu: 'Movie' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
               (props.menu === 'Movie' ? 'underline' : '')
+            }
+            onClick={
+              location.pathname != '/weather'
+                ? () => props.setCurrentPage(1)
+                : null
             }
           >
             Movie

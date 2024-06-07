@@ -53,7 +53,16 @@ function Home(props) {
   const firstPostIndex = lastPostIndex - postsPerPage
 
   const newsWithoutRemovedPosts = news
-    ?.filter((data) => data.title.includes(props.search))
+    .sort(function (a, b) {
+      if (a.urlToImage != null && b.urlToImage === null) {
+        return -1
+      }
+      if (a.urlToImage === null && b.urlToImage != null) {
+        return 1
+      }
+      return 0
+    })
+    ?.filter((data) => data.title.toLowerCase().includes(props.search.toLowerCase()))
     ?.filter((data) => data.title != '[Removed]')
 
   //console.log("news length"+newsWithoutRemovedPosts.length)
@@ -62,7 +71,7 @@ function Home(props) {
     firstPostIndex,
     lastPostIndex
   )
-  console.log(currentNewsPosts)
+ 
   return (
     <div>
       <div className="mt-12 p-5 grid grid-cols-4">
@@ -76,7 +85,7 @@ function Home(props) {
             }
             return 0
           })
-          ?.filter((data) => data.title.includes(props.search))
+         
           .map((data) => {
             return (
               <>

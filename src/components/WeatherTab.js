@@ -5,11 +5,15 @@ import CurrentWeather from "./current-weather/current-weather";
 import Forecast from "./forecast/forecast";
 import Navbar from "./Navbar";
 import Search from "./search/search";
+import { useLocation } from "react-router-dom";
 
 function WeatherTab() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const location=useLocation();
+  
 
   // Function to fetch weather based on lat and lon
   const fetchWeather = async (lat, lon) => {
