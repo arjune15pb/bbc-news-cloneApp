@@ -19,7 +19,6 @@ function Navbar(props) {
       console.error(err)
     }
   }
-
   return (
     <div className="grid grid-cols-3 bg-black text-white fixed">
       <div className=" flex p-2">

@@ -32,15 +32,16 @@ function Home(props) {
     fetch(
       `https://newsapi.org/v2/everything?q=${
         props.menu ? props.menu : 'All'
-      }&sortBy=popularity&apiKey=6c03d021c8cc4e6694a5ea47bc194b69`
+      }&sortBy=popularity&apiKey=1b4c757ac4b744b7b0ec3b2f3f37ec3a`
     )
       .then((res) => res.json())
       .then((json) => setNews(json.articles))
   }
 
   useEffect(() => {
+    
     getNews()
-  }, [news])
+  })
 
   const Image = ({ isImageNull, homeImage, altText }) => {
     if (isImageNull == null) {
@@ -110,7 +111,7 @@ function Home(props) {
                         {data.title}
                       </div>
                       <p className="text-gray-700 text-base data-content">
-                        {data.content}
+                        {props.menu==="All"?data.description:data.content}
                       </p>
                     </div>
                   </div>
