@@ -41,11 +41,11 @@ function Navbar(props) {
       </div>
 
       <div className="flex">
-        <Link className="mt-4" to="/" state={{ menu: 'All' }}>
+        <Link className="mt-4" to="/" state={{ menu: 'Everything' }}>
           <button
             className={
               'ml-7 font-semibold text-sm ' +
-              (props.menu === 'All' ? 'underline' : '')
+              (props.menu === 'Everything' ? 'underline' : '')
             }
             onClick={
               location.pathname != '/weather'
