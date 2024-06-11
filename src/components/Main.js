@@ -10,10 +10,10 @@ function Main(props){
     // const [currentPage, setCurrentPage] = useState(1)
 
     
-    const [menu,setMenu]= useState("All")
+    const [menu,setMenu]= useState("Everything")
     const [search, setSearch]= useState("")
    
-   let menu1='All'
+   let menu1='Everything'
     if(location.state!=null){
       menu1=location.state.menu
         

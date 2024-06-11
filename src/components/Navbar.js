@@ -20,7 +20,7 @@ function Navbar(props) {
     }
   }
   return (
-    <div className="grid grid-cols-3 bg-black text-white fixed">
+    <div className="grid grid-cols-3 bg-black text-white fixed flex">
       <div className=" flex p-2">
         <img src={logo} className="h-10 " />
         {auth.currentUser ? (
@@ -44,7 +44,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Everything' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              ' font-semibold text-sm ' +
               (props.menu === 'Everything' ? 'underline' : '')
             }
             onClick={
@@ -60,7 +60,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/weather" state={{ menu: 'Weather' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (location.pathname === '/weather' ? 'underline' : '')
             }
             onClick={() => props.setCurrentPage(1)}
@@ -72,7 +72,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Sport' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Sport' ? 'underline' : '')
             }
             onClick={
@@ -89,7 +89,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Business' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Business' ? 'underline' : '')
             }
             onClick={
@@ -104,7 +104,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Innovation' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Innovation' ? 'underline' : '')
             }
             onClick={
@@ -120,7 +120,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Culture' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Culture' ? 'underline' : '')
             }
             onClick={
@@ -136,7 +136,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Travel' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Travel' ? 'underline' : '')
             }
             onClick={
@@ -152,7 +152,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Earth' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Earth' ? 'underline' : '')
             }
             onClick={
@@ -168,7 +168,7 @@ function Navbar(props) {
         <Link className="mt-4" to="/" state={{ menu: 'Movie' }}>
           <button
             className={
-              'ml-7 font-semibold text-sm ' +
+              'ml-5 font-semibold text-sm ' +
               (props.menu === 'Movie' ? 'underline' : '')
             }
             onClick={

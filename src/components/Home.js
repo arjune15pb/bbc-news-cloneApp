@@ -32,7 +32,7 @@ function Home(props) {
     fetch(
       `https://newsapi.org/v2/everything?q=${
         props.menu ? props.menu : 'All'
-      }&sortBy=popularity&apiKey=1b4c757ac4b744b7b0ec3b2f3f37ec3a`
+      }&sortBy=popularity&apiKey=7df807f5ea6d43a696495eee9c777f3b`
     )
       .then((res) => res.json())
       .then((json) => setNews(json.articles))
